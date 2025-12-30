@@ -10,22 +10,20 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  
-  <!-- 1. 顶部标题区 (Hero Widget) -->
+  <!-- 1. 顶部标题区 (视觉升级版：大字号+极光背景) -->
   <Hero
     actions={[
       {
         variant: 'primary',
         text: '立即使用',
-        href: '#projects',
+        href: '#projects', 
         icon: 'tabler:rocket',
       },
       { text: '关于我', href: 'https://github.com/Zxt-qmy', target: '_blank' },
     ]}
   >
-    <!-- 标题部分：增加了渐变色和超大字体 -->
     <Fragment slot="title">
-      <span class="block text-lg md:text-xl text-blue-600 dark:text-purple-400 mb-2 font-bold tracking-wide uppercase">
+      <span class="block text-lg md:text-xl text-blue-600 dark:text-blue-400 mb-2 font-bold tracking-wide uppercase">
         AI Productivity Tools
       </span>
       欢迎来到 
@@ -36,5 +34,56 @@ const metadata = {
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="hidden sm:inline text-gray-500 dark:text-gray-400 text-lg">
-        这里是我探索 AI 技术的个人空间。收录了我搭建的实用工具以及一些有趣的 AI 实验项目
+      <span class="hidden sm:inline text-lg text-gray-600 dark:text-gray-400">
+        这里是我探索 AI 技术的个人空间。收录了我搭建的实用工具以及一些有趣的 AI 实验项目。
+      </span>
+    </Fragment>
+
+    <!-- 背景光晕特效 (仿 Macy AI 风格) -->
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-[#030620]"></div>
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] -z-10 pointer-events-none opacity-40 dark:opacity-20">
+        <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-purple-500/30 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen"></div>
+        <div class="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-blue-500/20 blur-[80px] rounded-full mix-blend-multiply dark:mix-blend-screen"></div>
+      </div>
+    </Fragment>
+  </Hero>
+
+  <!-- 2. 我的项目展示区 (紧凑布局 + 删除了Qwen助手) -->
+  <Features2
+    id="projects"
+    title="我的项目"
+    subtitle="选择一个工具来启动应用"
+    classes={{ 
+      container: 'max-w-6xl mx-auto px-4 lg:px-8 py-4 md:py-8', // 减少上下间距，更紧凑
+      headline: 'mb-8 md:mb-10', // 拉近标题和卡片的距离
+      items: 'gap-6',
+    }}
+    items={[
+      {
+        title: 'Markdown 灵感笔记',
+        description: '简约而不简单的在线 Markdown 编辑器。支持实时预览与极简模式，为您的创作提供无干扰的沉浸式体验。',
+        icon: 'tabler:edit',
+        classes: { icon: 'w-10 h-10 text-white bg-blue-600 rounded-full p-2' },
+        callToAction: { text: '立即使用', href: '#' }, 
+      },
+      {
+        title: '智能体测试平台',
+        description: '专业的对话智能体调试工作台。支持自主配置密钥与应用 ID，为开发者提供灵活的智能体交互测试环境。',
+        icon: 'tabler:robot',
+        classes: { icon: 'w-10 h-10 text-white bg-purple-600 rounded-full p-2' },
+        callToAction: { text: '立即使用', href: '#' },
+      },
+      {
+        title: '更多工具开发中...',
+        description: '敬请期待更多有趣的 AI 实验项目上线。',
+        icon: 'tabler:bulb',
+        classes: { icon: 'w-10 h-10 text-white bg-indigo-600 rounded-full p-2' },
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-transparent"></div>
+    </Fragment>
+  </Features2>
+</Layout>

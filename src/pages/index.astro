@@ -2,7 +2,6 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Features2 from '~/components/widgets/Features2.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'Zxt AI 实验室 - 探索我的 AI 工具箱',
@@ -11,84 +10,31 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  
   <!-- 1. 顶部标题区 (Hero Widget) -->
   <Hero
     actions={[
       {
         variant: 'primary',
         text: '立即使用',
-        href: '#projects', // 点击跳转到下面的项目区
+        href: '#projects',
         icon: 'tabler:rocket',
       },
-      { text: '关于我', href: '#' },
+      { text: '关于我', href: 'https://github.com/Zxt-qmy', target: '_blank' },
     ]}
   >
+    <!-- 标题部分：增加了渐变色和超大字体 -->
     <Fragment slot="title">
-      欢迎来到 <span class="text-accent dark:text-white highlight">Zxt AI 实验室</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        这里是我探索 AI 技术的个人空间。收录了我搭建的实用工具、调试的智能体以及一些有趣的 AI 实验项目。
+      <span class="block text-lg md:text-xl text-blue-600 dark:text-purple-400 mb-2 font-bold tracking-wide uppercase">
+        AI Productivity Tools
+      </span>
+      欢迎来到 
+      <br class="block sm:hidden" />
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-500 to-indigo-400 font-extrabold text-5xl md:text-7xl tracking-tighter">
+        Zxt AI 实验室
       </span>
     </Fragment>
-  </Hero>
-
-  <!-- 2. 我的项目展示区 (Features2 Widget) -->
-  <Features2
-    id="projects"
-    title="我的项目"
-    subtitle="选择一个工具来启动应用"
-    items={[
-      {
-        title: 'Markdown 灵感笔记',
-        description: '简约而不简单的在线 Markdown 编辑器。支持实时预览与极简模式，为您的创作提供无干扰的沉浸式体验。',
-        icon: 'tabler:edit',
-        callToAction: { text: '立即使用', href: '#' }, // 这里填你具体的工具链接
-      },
-      {
-        title: 'Qwen-Omni 跑批助手',
-        description: '基于 Qwen-Omni 模型的大量调用工具。支持高并发数据处理与自动化工作流，大幅提升 AI 应用落地效率。',
-        icon: 'tabler:message-chatbot',
-        callToAction: { text: '立即使用', href: '#' },
-      },
-      {
-        title: '智能体测试平台',
-        description: '专业的对话智能体调试工作台。支持自主配置密钥与应用 ID，为开发者提供灵活的智能体交互测试环境。',
-        icon: 'tabler:robot',
-        callToAction: { text: '立即使用', href: '#' },
-      },
-      {
-        title: '更多工具开发中...',
-        description: '敬请期待更多有趣的 AI 实验项目上线。',
-        icon: 'tabler:bulb',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
-
-  <!-- 3. 底部简单呼吁 (CallToAction Widget) -->
-  <!-- 如果不想显示底部这个长条，可以直接把下面这段 CallToAction 删除 -->
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: '访问 Github',
-        href: 'https://github.com/Zxt-qmy', // 换成你的 Github 地址
-        target: '_blank',
-        icon: 'tabler:brand-github',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      对这些项目感兴趣？
-    </Fragment>
 
     <Fragment slot="subtitle">
-      欢迎关注我的 Github，或者直接联系我进行技术交流。
-    </Fragment>
-  </CallToAction>
-</Layout>
+      <span class="hidden sm:inline text-gray-500 dark:text-gray-400 text-lg">
+        这里是我探索 AI 技术的个人空间。收录了我搭建的实用工具以及一些有趣的 AI 实验项目

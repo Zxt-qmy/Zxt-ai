@@ -1,27 +1,21 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
-  title: 'Zxt AI实验室',
+  title: 'Zxt AI 实验室 - 探索我的 AI 工具箱',
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- 1. 顶部标题区 (视觉升级版：大字号+极光背景) -->
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: '立即使用',
-        href: '#projects', 
-        icon: 'tabler:rocket',
-      },
-    ]}
-  >
+  <!-- 1. 顶部标题区 -->
+  <!-- 这里的 actions={[]} 表示没有任何按钮 -->
+  <Hero actions={[]}>
     <Fragment slot="title">
+      <span class="block text-lg md:text-xl text-blue-600 dark:text-blue-400 mb-2 font-bold tracking-wide uppercase">
+        AI Productivity Tools
+      </span>
       欢迎来到 
       <br class="block sm:hidden" />
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-500 to-indigo-400 font-extrabold text-5xl md:text-7xl tracking-tighter">
@@ -35,7 +29,7 @@ const metadata = {
       </span>
     </Fragment>
 
-    <!-- 背景光晕特效  -->
+    <!-- 背景光晕特效 -->
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-white dark:bg-[#030620]"></div>
       <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] -z-10 pointer-events-none opacity-40 dark:opacity-20">
@@ -45,25 +39,27 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <!-- 2. 我的项目展示区（带筛选功能） -->
-  <section id="projects" class="max-w-6xl mx-auto px-4 lg:px-8 py-8 md:py-12">
-    <!-- 标题区域 -->
+  <!-- 2. 我的项目展示区 (原生 HTML 布局，更紧凑、更好看) -->
+  <!-- 关键修改：py-2 (上方间距极小), mt-[-20px] (负边距进一步拉近距离) -->
+  <section id="projects" class="max-w-6xl mx-auto px-4 lg:px-8 py-2 md:py-6 mt-[-20px] mb-20 relative z-10">
+    
+    <!-- 区域标题 -->
     <div class="text-center mb-8">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
         我的项目
       </h2>
-      <p class="text-lg text-gray-600 dark:text-gray-400">
+      <p class="text-gray-600 dark:text-gray-400">
         选择一个工具来启动应用
       </p>
     </div>
 
     <!-- 筛选标签栏 -->
-    <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10 md:mb-12">
-      {['全部', '文本与对话', '图像与视频', '语音与音频', '实用工具', '数据分析'].map((category) => (
+    <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-8">
+      {['全部', '文本与对话', '图像与视频', '实用工具'].map((category) => (
         <button
-          class={`px-4 py-2 rounded-full text-sm md:text-base font-medium transition-all duration-200 ${category === '全部' 
+          class={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${category === '全部' 
             ? 'bg-blue-600 text-white shadow-md' 
-            : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'}`}
+            : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'}`}
           data-filter={category === '全部' ? 'all' : category}
         >
           {category}
@@ -71,198 +67,91 @@ const metadata = {
       ))}
     </div>
 
-    <!-- 项目卡片容器 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- 项目1: Markdown 灵感笔记 -->
-      <div 
-        class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
-        data-category="文本与对话"
-      >
-        <div class="flex items-start mb-5">
-          <div class="w-12 h-12 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 rounded-full p-2.5 mr-4">
-            <div class="w-7 h-7 text-blue-600 dark:text-blue-400">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path>
-              </svg>
-            </div>
+    <!-- 项目卡片网格 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      
+      <!-- 卡片 1: Markdown -->
+      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700" data-category="文本与对话">
+        <div class="flex items-start mb-4">
+          <div class="w-10 h-10 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 rounded-full mr-3">
+            <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg>
           </div>
           <div>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Markdown 灵感笔记</h3>
-            <span class="inline-block px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full">
-              文本与对话
-            </span>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white">Markdown 灵感笔记</h3>
+            <span class="text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded-full">文本与对话</span>
           </div>
         </div>
-        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-          简约而不简单的在线 Markdown 编辑器。支持实时预览与极简模式，为您的创作提供无干扰的沉浸式体验。
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+          简约而不简单的在线 Markdown 编辑器。支持实时预览与极简模式。
         </p>
-        <a 
-          href="#" 
-          class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
-        >
-          立即使用
-          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-          </svg>
+        <a href="#" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400">
+          立即使用 <svg class="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
 
-      <!-- 项目2: 智能体测试平台 -->
-      <div 
-        class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
-        data-category="文本与对话"
-      >
-        <div class="flex items-start mb-5">
-          <div class="w-12 h-12 flex items-center justify-center bg-purple-100 dark:bg-purple-900/30 rounded-full p-2.5 mr-4">
-            <div class="w-7 h-7 text-purple-600 dark:text-purple-400">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 8V4H8"></path>
-                <rect width="16" height="12" x="4" y="8" rx="2"></rect>
-                <path d="M2 14h2"></path>
-                <path d="M20 14h2"></path>
-                <path d="M15 13v2"></path>
-                <path d="M9 13v2"></path>
-              </svg>
-            </div>
+      <!-- 卡片 2: 智能体平台 -->
+      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700" data-category="文本与对话">
+        <div class="flex items-start mb-4">
+          <div class="w-10 h-10 flex items-center justify-center bg-purple-100 dark:bg-purple-900/30 rounded-full mr-3">
+            <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
           </div>
           <div>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">智能体测试平台</h3>
-            <span class="inline-block px-3 py-1 text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full">
-              文本与对话
-            </span>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white">智能体测试平台</h3>
+            <span class="text-xs text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20 px-2 py-0.5 rounded-full">文本与对话</span>
           </div>
         </div>
-        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-          专业的对话智能体调试工作台。支持自主配置密钥与应用 ID，为开发者提供灵活的智能体交互测试环境。
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+          专业的对话智能体调试工作台。支持自主配置密钥与应用 ID。
         </p>
-        <a 
-          href="#" 
-          class="inline-flex items-center text-purple-600 dark:text-purple-400 font-medium hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
-        >
-          立即使用
-          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-          </svg>
+        <a href="#" class="inline-flex items-center text-sm font-medium text-purple-600 hover:text-purple-700 dark:text-purple-400">
+          立即使用 <svg class="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
 
-      <!-- 项目3: 更多工具开发中... -->
-      <div 
-        class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
-        data-category="实用工具"
-      >
-        <div class="flex items-start mb-5">
-          <div class="w-12 h-12 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/30 rounded-full p-2.5 mr-4">
-            <div class="w-7 h-7 text-indigo-600 dark:text-indigo-400">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path>
-                <path d="M9 18h6"></path>
-                <path d="M10 22h4"></path>
-              </svg>
-            </div>
+      <!-- 卡片 3: AI 图片生成器 (已调到这里) -->
+      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700" data-category="图像与视频">
+        <div class="flex items-start mb-4">
+          <div class="w-10 h-10 flex items-center justify-center bg-green-100 dark:bg-green-900/30 rounded-full mr-3">
+            <svg class="w-6 h-6 text-green-600 dark:text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
           </div>
           <div>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">更多工具开发中...</h3>
-            <span class="inline-block px-3 py-1 text-xs font-medium bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full">
-              实用工具
-            </span>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white">AI 图片生成器</h3>
+            <span class="text-xs text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full">图像与视频</span>
           </div>
         </div>
-        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-          敬请期待更多有趣的 AI 实验项目上线。
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+          基于 AI 的创意图片生成工具，快速将文字描述转化为视觉图像。
         </p>
-        <div class="text-gray-400 dark:text-gray-500 font-medium">
-          敬请期待
-        </div>
-      </div>
-
-      <!-- 新增示例项目 -->
-      <div 
-        class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
-        data-category="图像与视频"
-      >
-        <div class="flex items-start mb-5">
-          <div class="w-12 h-12 flex items-center justify-center bg-green-100 dark:bg-green-900/30 rounded-full p-2.5 mr-4">
-            <div class="w-7 h-7 text-green-600 dark:text-green-400">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                <circle cx="9" cy="9" r="2"></circle>
-                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
-              </svg>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">AI 图片生成器</h3>
-            <span class="inline-block px-3 py-1 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full">
-              图像与视频
-            </span>
-          </div>
-        </div>
-        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
-          基于 AI 的创意图片生成工具，支持多种艺术风格，快速将文字描述转化为视觉图像。
-        </p>
-        <a 
-          href="#" 
-          class="inline-flex items-center text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors"
-        >
-          立即使用
-          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-          </svg>
+        <a href="#" class="inline-flex items-center text-sm font-medium text-green-600 hover:text-green-700 dark:text-green-400">
+          立即使用 <svg class="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
+
+      <!-- 卡片 4: 更多工具 (排在最后) -->
+      <div class="group bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-5 shadow-none border border-dashed border-gray-300 dark:border-gray-700 flex flex-col justify-center items-center text-center opacity-70" data-category="实用工具">
+        <div class="w-10 h-10 flex items-center justify-center bg-gray-200 dark:bg-gray-700 rounded-full mb-3">
+          <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white">更多工具开发中...</h3>
+        <p class="text-xs text-gray-500 mt-1">敬请期待新项目上线</p>
+      </div>
+
     </div>
 
-    <!-- 筛选功能的 JavaScript -->
+    <!-- 筛选逻辑脚本 -->
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const filterButtons = document.querySelectorAll('[data-filter]');
-        const projectCards = document.querySelectorAll('[data-category]');
-        
-        filterButtons.forEach(button => {
-          button.addEventListener('click', function() {
-            // 更新按钮状态
-            filterButtons.forEach(btn => {
-              btn.classList.remove('bg-blue-600', 'text-white', 'shadow-md');
-              btn.classList.add('bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300', 'border', 'border-gray-200', 'dark:border-gray-700');
-            });
-            
-            this.classList.remove('bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300', 'border', 'border-gray-200', 'dark:border-gray-700');
-            this.classList.add('bg-blue-600', 'text-white', 'shadow-md');
-            
-            // 筛选项目
-            const filter = this.getAttribute('data-filter');
-            
-            projectCards.forEach(card => {
-              if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                card.style.display = 'block';
-                setTimeout(() => {
-                  card.style.opacity = '1';
-                  card.style.transform = 'translateY(0)';
-                }, 10);
-              } else {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(10px)';
-                setTimeout(() => {
-                  card.style.display = 'none';
-                }, 300);
-              }
-            });
+      document.addEventListener('DOMContentLoaded', () => {
+        const btns = document.querySelectorAll('[data-filter]');
+        const cards = document.querySelectorAll('[data-category]');
+        btns.forEach(btn => btn.addEventListener('click', () => {
+          btns.forEach(b => b.className = b.className.replace('bg-blue-600 text-white shadow-md', 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700'));
+          btn.className = btn.className.replace('bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700', 'bg-blue-600 text-white shadow-md');
+          const f = btn.getAttribute('data-filter');
+          cards.forEach(c => {
+            c.style.display = (f === 'all' || c.getAttribute('data-category') === f) ? 'block' : 'none';
           });
-        });
-        
-        // 初始状态：显示所有项目
-        projectCards.forEach(card => {
-          card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-        });
+        }));
       });
     </script>
-    
-    <style>
-      [data-category] {
-        transition: opacity 0.3s ease, transform 0.3s ease;
-      }
-    </style>
   </section>
 </Layout>
